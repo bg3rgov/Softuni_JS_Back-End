@@ -1,0 +1,60 @@
+{{#unless isLoggedIn}}
+<!-- LOGGED OUT USES -->
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Tutorials</h1>
+        <p class="lead">Start Self-Learning Today: Be the best Developer in the company</p>
+    </div>
+</div>
+
+<div>
+    <h1 class="text-center">Top Courses</h1>
+    {{#if courses}}
+    <div class="container mt-3">
+        <div class="row d-flex justify-content-center">
+            
+            <div class="card-deck">
+                {{#each courses}}
+                {{>guestCourse}}
+                {{/each}}
+            </div>
+            
+
+        </div>
+    {{else}}   
+        <h4 class="text-center">No courses...</h4>
+
+    </div>
+    {{/if}}
+</div>
+
+{{else}}
+
+<!-- LOGGED IN USERS -->
+<h1 class="text-center">Courses</h1>
+<section>
+    <a href="/create" class="btn btn-warning ">Create Course</a>
+
+    <form class="search float-right" action="/search" method="POST">
+        <label>Search: </label>
+        <input name="search" type="text">
+        <input type="submit" class="btn btn-primary" value="Search">
+    </form>
+
+</section>
+{{#if courses}}
+<div class="container mt-3">
+    <div class="row ">
+        <div class="card-deck d-flex justify-content-center">
+            
+            {{#each courses}}
+            {{>userCourse}}
+            {{/each}}
+
+        </div>
+    </div>
+</div>
+{{else}}
+<h3 class="text-center">No courses...</h3>
+{{/if}}
+{{/unless}}
